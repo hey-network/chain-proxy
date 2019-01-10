@@ -2,7 +2,6 @@ const { KarmaStoreManager } = require('./contracts/karmaStoreManager');
 const { isAddress } = require('./helpers/utils');
 
 exports.handler = async (event) => {
-    console.log(process.env.SIDECHAIN_DUMMY_PRIVATE_KEY)
     const address = event.pathParameters.address;
 
     const karmaStoreManager = await KarmaStoreManager.createAsync();
