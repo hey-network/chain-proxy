@@ -1,0 +1,34 @@
+{
+  "name": "chain-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore . --fix",
+    "zip": "zip -r lambda.zip ./src ./node_modules",
+    "clean": "rm lambda.zip",
+    "installTarget": "rm -rf ./node_modules && docker run -it -v $(pwd):/src node:8.10 /bin/sh -c 'cd src;npm i'",
+    "code:staging": "aws lambda update-function-code --function-name ChainProxy --zip-file fileb://lambda.zip --profile hey",
+    "env:staging": "aws lambda update-function-configuration --function-name ChainProxy --profile hey --environment Variables=\"{`cat .env | xargs | sed 's/ /,/g'`}\"",
+    "deploy:staging": "npm run zip && npm run code:staging && npm run env:staging && npm run clean"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "dotenv": "^6.2.0",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0",
+    "nock": "^10.0.4"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "loom-js": "^1.36.1",
+    "web3": "^1.0.0-beta.33",
+    "web3-core-requestmanager": "^1.0.0-beta.33",
+    "websocket": "^1.0.28",
+    "winston": "^3.1.0"
+  }
+}
