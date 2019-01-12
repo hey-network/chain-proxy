@@ -4,6 +4,7 @@
   "description": "",
   "main": "./src/index.js",
   "scripts": {
+    "test": "node -r dotenv/config test/index.test.js",
     "lint": "eslint --ignore-path .gitignore . --fix",
     "zip": "zip -r lambda.zip ./src ./node_modules",
     "clean": "rm lambda.zip",
@@ -26,9 +27,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "loom-js": "^1.36.1",
-    "web3": "^1.0.0-beta.33",
-    "web3-core-requestmanager": "^1.0.0-beta.33",
-    "websocket": "^1.0.28",
+    "web3": "^1.0.0-beta.37",
     "winston": "^3.1.0"
   }
 }

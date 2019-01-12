@@ -10,6 +10,7 @@ const {
 } = require('loom-js');
 const { logger } = require('../helpers/logger');
 const { asciiToHex } = require('../helpers/utils');
+const { getTransactionsByAccount } = require('../helpers/explorer');
 
 const {
   SIDECHAIN_NETWORK,
@@ -39,6 +40,8 @@ class KarmaStoreManager {
 
     const from = LocalAddress.fromPublicKey(publicKey).toString();
     const web3 = new Web3(new LoomProvider(client, privateKey));
+
+    await web3.eth.getBlock(1);
 
     client.on('error', (msg) => {
       logger.error('Error on connect to client', msg);
@@ -87,6 +90,10 @@ class KarmaStoreManager {
     return this.contract.methods
       .getIncrementedUsersCount()
       .call({ from: this.from });
+  }
+
+  async getRewardTransactionsAsync() {
+    getTransactionsByAccount(this.web3.eth, this.contract.options.address, 123690, 1236977);
   }
 }
 
