@@ -41,6 +41,8 @@ class KarmaStoreManager {
     const from = LocalAddress.fromPublicKey(publicKey).toString();
     const web3 = new Web3(new LoomProvider(client, privateKey));
 
+    console.log(await web3.eth.getBlock(10000));
+
     client.on('error', (msg) => {
       logger.error('Error on connect to client', msg);
       logger.error('Please verify if loom command is running');
