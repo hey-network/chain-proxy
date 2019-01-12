@@ -41,8 +41,6 @@ class KarmaStoreManager {
     const from = LocalAddress.fromPublicKey(publicKey).toString();
     const web3 = new Web3(new LoomProvider(client, privateKey));
 
-    await web3.eth.getBlock(1);
-
     client.on('error', (msg) => {
       logger.error('Error on connect to client', msg);
       logger.error('Please verify if loom command is running');
@@ -90,10 +88,6 @@ class KarmaStoreManager {
     return this.contract.methods
       .getIncrementedUsersCount()
       .call({ from: this.from });
-  }
-
-  async getRewardTransactionsAsync() {
-    getTransactionsByAccount(this.web3.eth, this.contract.options.address, 123690, 1236977);
   }
 }
 
